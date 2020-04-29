@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
 import "moment-timezone";
+import { Alert } from "reactstrap";
 export default class List extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +25,7 @@ export default class List extends Component {
     const data = { items: this.state.input };
 
     fetch("/api/add", {
-      method: "POST", // or 'PUT'
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -98,28 +99,38 @@ export default class List extends Component {
   render() {
     const todos = this.state.unchecked.map((el, index) => (
       <span key={index}>
-        <button value={el.id} onClick={(this.check = this.check.bind(this))}>
-          &#10003;
-        </button>
-        <h6>{el.items}</h6>
-        <button value={el.id} onClick={(this.delete = this.delete.bind(this))}>
-          X
-        </button>
-        <br />
+        <Alert color="primary">
+          <button value={el.id} onClick={(this.check = this.check.bind(this))}>
+            &#10003;
+          </button>
+          {el.items}
+          <button
+            value={el.id}
+            onClick={(this.delete = this.delete.bind(this))}
+          >
+            X
+          </button>
+        </Alert>
       </span>
     ));
     const done = this.state.checked.map((el, index) => (
       <span key={index}>
-        <button
-          value={el.id}
-          onClick={(this.unCheck = this.unCheck.bind(this))}
-        >
-          &#10003;
-        </button>
-        <h6>{el.items}</h6>
-        <button value={el.id} onClick={(this.delete = this.delete.bind(this))}>
-          X
-        </button>
+        <Alert color="danger">
+          <button
+            value={el.id}
+            onClick={(this.unCheck = this.unCheck.bind(this))}
+          >
+            un - &#10003;
+          </button>
+          {el.items}
+          <button
+            value={el.id}
+            onClick={(this.delete = this.delete.bind(this))}
+          >
+            X
+          </button>
+        </Alert>
+
         <br />
       </span>
     ));
