@@ -26,4 +26,41 @@ module.exports = function (app) {
       res.json(dbData);
     });
   });
+  app.put("/api/check:id", (req, res) => {
+    db.Todos.update(
+      {
+        checked: true,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    ).then((dbData) => {
+      res.json(dbData);
+    });
+  });
+  app.put("/api/uncheck:id", (req, res) => {
+    db.Todos.update(
+      {
+        checked: false,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    ).then((dbData) => {
+      res.json(dbData);
+    });
+  });
+  app.delete("/api/delete:id", (req, res) => {
+    db.Todos.destroy({
+      where: {
+        id: req.params.id,
+      },
+    }).then((dbData) => {
+      res.json(dbData);
+    });
+  });
 };
