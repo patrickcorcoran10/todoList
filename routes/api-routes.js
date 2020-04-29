@@ -17,4 +17,13 @@ module.exports = function (app) {
       res.json(dbData);
     });
   });
+  app.get("/api/getDones", (req, res) => {
+    db.Todos.findAll({
+      where: {
+        checked: true,
+      },
+    }).then((dbData) => {
+      res.json(dbData);
+    });
+  });
 };
