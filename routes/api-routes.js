@@ -1,6 +1,7 @@
 const db = require("../models");
 module.exports = function (app) {
   app.post("/api/add", (req, res) => {
+    console.log("we are on the back end");
     db.Todos.create({
       items: req.body.items,
       checked: false,
@@ -27,6 +28,7 @@ module.exports = function (app) {
     });
   });
   app.put("/api/check:id", (req, res) => {
+    console.log("we are checking");
     db.Todos.update(
       {
         checked: true,
