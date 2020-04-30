@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+
+import CheckIcon from "@material-ui/icons/Check";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "moment-timezone";
 import "./List.css";
 export default class List extends Component {
@@ -100,49 +105,46 @@ export default class List extends Component {
   render() {
     const todos = this.state.unchecked.map((el, index) => (
       <span key={index}>
-        <Button
-          variant="outlined"
-          color="primary"
+        <IconButton
           value={el.id}
-          size="small"
           onClick={(this.check = this.check.bind(this))}
         >
-          &#10003;
-        </Button>
+          <CheckIcon
+            variant="outlined"
+            color="primary"
+            size="small"
+          ></CheckIcon>
+        </IconButton>
         <span className="items">{el.items}</span>
-        <Button
-          variant="outlined"
-          color="secondary"
-          size="small"
+        <IconButton
+          aria-label="delete"
           value={el.id}
           onClick={(this.delete = this.delete.bind(this))}
         >
-          X
-        </Button>
+          <DeleteIcon fontSize="small" />
+        </IconButton>
         <br />
       </span>
     ));
     const done = this.state.checked.map((el, index) => (
       <span key={index}>
-        <Button
+        <IconButton
           variant="outlined"
           size="small"
           value={el.id}
           onClick={(this.unCheck = this.unCheck.bind(this))}
         >
-          un - &#10003;
-        </Button>
+          <KeyboardBackspaceIcon />
+        </IconButton>
         <span className="items">{el.items}</span>
 
-        <Button
-          variant="outlined"
-          size="small"
-          color="secondary"
+        <IconButton
+          aria-label="delete"
           value={el.id}
           onClick={(this.delete = this.delete.bind(this))}
         >
-          X
-        </Button>
+          <DeleteIcon fontSize="small" />
+        </IconButton>
 
         <br />
       </span>
